@@ -36,8 +36,8 @@ int main(int argc, const char * argv[]) {
         }
     }
     
-    Agent_row = Next_row = 2;
-    Agent_col = Next_col = 1;
+    Agent_row = 2;
+    Agent_col = 1;
     
     // ----- Q Learning ----- //
     
