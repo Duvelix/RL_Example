@@ -23,6 +23,7 @@ int main(int argc, const char * argv[]) {
     int Next_row, Next_col;
     int Direction;
     int i, j, k;
+    //int count = 0;
     
     srand((int)time(NULL));
     
@@ -83,16 +84,18 @@ int main(int argc, const char * argv[]) {
                 break;
             case 3: // LEFT
                 Next_row = Agent_row;
-                Next_row = Agent_col - 1;
+                Next_col = Agent_col - 1;
                 break;
-            default:
+            default: // Meaningless
+                Next_row = Agent_row;
+                Next_col = Agent_col;
                 break;
         }
         
         // ----- Calculate Reward ----- //
         if((Next_row == 1) && (Next_col == 4))
             REWARD = 8;
-        else if((Agent_row == 0) || (Agent_row == ROW-1) || (Agent_col == 0) || (Agent_col == COLUMN-1))
+        else if((Next_row == 0) || (Next_row == ROW-1) || (Next_col == 0) || (Next_col == COLUMN-1))
             REWARD = -8;
         else
             REWARD = 0;
@@ -109,6 +112,8 @@ int main(int argc, const char * argv[]) {
         
         // ----- Update Q-value using Q(s, a) ----- //
         Q[Agent_row][Agent_col][Direction] = (1-ALPHA) * Q[Agent_row][Agent_col][Direction] + ALPHA * (REWARD + GAMMA * Max_Q);
+        //printf("REWARD = %.2f\n", REWARD);
+        //printf("Q[%d][%d][%d] = %.2f\n", Agent_row, Agent_col, Direction, Q[Agent_row][Agent_col][Direction]);
         
         // ----- Move to the Next state ----- //
         Agent_row = Next_row;
@@ -183,10 +188,35 @@ int main(int argc, const char * argv[]) {
                 break;
         }
         
+        if((Agent_row < 0) || (Agent_col < 0))
+            break;
+        
         printf("(%d, %d)", Agent_row, Agent_col);
         
     }
     
     printf("\n");
+    
+    /*
+    
+    for(i=0;i<ROW;i++){
+        for(j=0;j<COLUMN;j++){
+            printf("%d   ", ++count);
+        }
+    }
+    
+    printf("\n");
+    
+    for(k = 0; k < ACTION; k++){
+        for(i = 0; i < ROW; i++){
+            for(j = 0; j < COLUMN; j++){
+                printf("%.2f ", Q[i][j][k]);
+            }
+        }
+        printf("\n");
+    }
+     
+     */
+    
     return 0;
 }
