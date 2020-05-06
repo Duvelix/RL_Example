@@ -23,7 +23,7 @@ int main(int argc, const char * argv[]) {
     int Next_row, Next_col;
     int Direction;
     int i, j, k;
-    //int count = 0;
+    int count = 0;
     
     srand((int)time(NULL));
     
@@ -39,6 +39,7 @@ int main(int argc, const char * argv[]) {
     
     Agent_row = 2;
     Agent_col = 1;
+    printf("(%d, %d)", Agent_row, Agent_col);
     
     // ----- Q Learning ----- //
     
@@ -118,6 +119,7 @@ int main(int argc, const char * argv[]) {
         // ----- Move to the Next state ----- //
         Agent_row = Next_row;
         Agent_col = Next_col;
+        printf(" -> (%d, %d)", Agent_row, Agent_col);
         
         // ----- Destination Checking ----- //
         if((Agent_row == 1) && (Agent_col == 4)){
@@ -136,17 +138,18 @@ int main(int argc, const char * argv[]) {
         }
         
         // ----- Break Condition ----- //
-        if(Episode == 10000)
+        if(Episode == 1)
             break;
         
     }
     
-    
+    printf("\n");
     
     printf("Number of Episode : %d\n", Episode);
     printf("# of Destination : %d\n", destination);
     printf("# of Boundary : %d\n", boundary);
     
+    /*
     
     Agent_row = 2;
     Agent_col = 1;
@@ -197,7 +200,7 @@ int main(int argc, const char * argv[]) {
     
     printf("\n");
     
-    /*
+    */
     
     for(i=0;i<ROW;i++){
         for(j=0;j<COLUMN;j++){
@@ -216,7 +219,7 @@ int main(int argc, const char * argv[]) {
         printf("\n");
     }
      
-     */
+     
     
     return 0;
 }
